@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>UE4.26 Style Editor Mockup</title>
+<title>RE Style Editor Mockup</title>
 <style>
 :root{
   --bg:#1a1a1a;
@@ -22,20 +22,18 @@ body{
   height:100vh;
   overflow:hidden;
 }
-input, select, button{
-  font-family:inherit;
-}
+input,select,button{font-family:inherit}
+button{cursor:pointer}
+
 .editor{
   display:grid;
   grid-template-rows:30px 42px 1fr 26px;
   height:100vh;
 }
 
-/* TOP MENU */
+/* top */
 .menu-bar{
-  display:flex;
-  align-items:center;
-  gap:18px;
+  display:flex;align-items:center;gap:18px;
   padding:0 12px;
   background:linear-gradient(#303030,#252525);
   border-bottom:1px solid var(--border);
@@ -43,60 +41,37 @@ input, select, button{
 }
 .logo{
   width:18px;height:18px;border-radius:50%;
-  border:2px solid white; position:relative;
+  border:2px solid white;position:relative;
 }
 .logo:after{
-  content:""; position:absolute; inset:3px;
-  border:2px solid white; border-radius:50%;
+  content:"";position:absolute;inset:3px;
+  border:2px solid white;border-radius:50%;
 }
-.menu-item{
-  position:relative;
-  padding:6px 0;
-  cursor:pointer;
-}
+.menu-item{position:relative;padding:6px 0;cursor:pointer}
 .dropdown{
-  display:none;
-  position:absolute;
-  top:28px; left:0;
-  min-width:160px;
-  background:#2b2b2b;
-  border:1px solid var(--border);
-  z-index:100;
+  display:none;position:absolute;top:28px;left:0;
+  min-width:160px;background:#2b2b2b;border:1px solid var(--border);z-index:50;
 }
-.dropdown div{
-  padding:8px 12px;
-}
+.dropdown div{padding:8px 12px}
 .dropdown div:hover{background:#3a3a3a}
 .menu-item:hover .dropdown{display:block}
 
-/* TOOLBAR */
 .toolbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 12px;
-  background:linear-gradient(#373737,#2b2b2b);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 12px;background:linear-gradient(#373737,#2b2b2b);
   border-bottom:1px solid var(--border);
 }
-.left-tools,.center-tools,.right-tools{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
+.left-tools,.center-tools,.right-tools{display:flex;gap:8px;align-items:center}
 .tool-btn{
   min-width:32px;height:28px;
   display:grid;place-items:center;
-  border:1px solid #555;
-  background:#3a3a3a;
-  border-radius:3px;
+  border:1px solid #555;background:#3a3a3a;border-radius:3px;
   font-size:12px;
 }
-.play{
-  color:#9be46e;
-  border-color:#587443;
-}
+.tool-btn.active{outline:1px solid var(--accent); background:#4b3a1a;}
+.play{color:#9be46e;border-color:#587443}
 
-/* WORKSPACE */
+/* workspace */
 .workspace{
   display:grid;
   grid-template-columns:290px 1fr 340px;
@@ -105,43 +80,31 @@ input, select, button{
   padding:4px;
 }
 .panel{
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
   border:1px solid var(--border);
   background:var(--panel);
   overflow:hidden;
 }
 .panel-title{
   height:32px;
-  display:flex;
-  align-items:center;
-  padding:0 10px;
-  font-size:12px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 10px;font-size:12px;
   background:linear-gradient(#3a3a3a,#313131);
   border-bottom:1px solid var(--border);
 }
-.panel-body{
-  flex:1;
-  padding:10px;
-  overflow:auto;
-}
+.panel-body{flex:1;padding:10px;overflow:auto}
 
-/* HIERARCHY */
+/* hierarchy */
 .outliner-item{
-  padding:7px 8px;
-  margin-bottom:2px;
-  cursor:pointer;
-  border-radius:2px;
+  padding:7px 8px;margin-bottom:2px;border-radius:2px;cursor:pointer;
 }
 .outliner-item:hover{background:#3a3a3a}
-.outliner-item.active{
-  background:#4d3a17;
-  outline:1px solid var(--accent);
-}
+.outliner-item.active{background:#4d3a17;outline:1px solid var(--accent)}
 
-/* VIEWPORT */
+/* viewport */
 .viewport{
   position:relative;
+  overflow:hidden;
   background:
     linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
@@ -149,107 +112,112 @@ input, select, button{
   background-size:32px 32px;
 }
 .viewport-label{
-  position:absolute;
-  top:18px; left:20px;
-  font-size:42px;
-  font-weight:700;
+  position:absolute;top:18px;left:20px;
+  font-size:42px;font-weight:700;
   color:rgba(255,255,255,.08);
 }
+.viewport-toolbar{
+  position:absolute;top:10px;right:10px;display:flex;gap:6px;z-index:10;
+}
+.v-btn{
+  padding:6px 10px;
+  background:#303030;
+  border:1px solid #4b4b4b;
+  font-size:12px;
+  border-radius:3px;
+}
+.v-btn.active{outline:1px solid var(--accent)}
 
-/* DETAILS */
+/* fake 3D cube */
+.scene-object{
+  position:absolute;
+  width:90px;height:90px;
+  top:50%;left:50%;
+  transform-style:preserve-3d;
+  transform:translate(-50%,-50%) rotateX(-18deg) rotateY(25deg);
+  cursor:pointer;
+}
+.face{
+  position:absolute;
+  width:90px;height:90px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(245,166,35,.18);
+}
+.front{transform:translateZ(45px)}
+.back{transform:rotateY(180deg) translateZ(45px)}
+.right{transform:rotateY(90deg) translateZ(45px)}
+.left{transform:rotateY(-90deg) translateZ(45px)}
+.top{transform:rotateX(90deg) translateZ(45px)}
+.bottom{transform:rotateX(-90deg) translateZ(45px)}
+.scene-object.selected .face{
+  border-color:var(--accent);
+  box-shadow:0 0 12px rgba(245,166,35,.4);
+}
+
+/* gizmo */
+.gizmo{
+  position:absolute;
+  width:130px;height:130px;
+  border:2px dashed rgba(245,166,35,.65);
+  border-radius:50%;
+  pointer-events:none;
+  display:none;
+  transform:translate(-50%,-50%);
+}
+.gizmo.show{display:block}
+
+/* details */
 .group{margin-bottom:18px}
 .group h4{
-  margin-bottom:8px;
-  padding-bottom:6px;
+  margin-bottom:8px;padding-bottom:6px;
   border-bottom:1px solid var(--border);
   font-size:12px;
 }
 .row{
   display:grid;
   grid-template-columns:24px 1fr 1fr 1fr;
-  gap:6px;
-  margin-bottom:8px;
-  align-items:center;
+  gap:6px;margin-bottom:8px;align-items:center;
 }
-.axis{
-  font-size:11px;
-  color:var(--muted);
+.axis{font-size:11px;color:var(--muted)}
+.field,select{
+  width:100%;height:28px;
+  border:1px solid #444;background:#202020;color:#ddd;padding:4px 6px;
 }
-.field, select{
-  width:100%;
-  height:28px;
-  border:1px solid #444;
-  background:#202020;
-  color:#ddd;
-  padding:4px 6px;
-}
-.script-list{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
+.script-list{display:flex;flex-direction:column;gap:6px}
 .script-item{
-  padding:8px;
-  background:#202020;
-  border:1px solid #444;
-  font-size:12px;
+  padding:8px;background:#202020;border:1px solid #444;font-size:12px;
 }
 .add-script{
-  margin-top:8px;
-  width:100%;
-  height:30px;
-  background:#3a3a3a;
-  color:white;
-  border:1px solid #555;
-  cursor:pointer;
+  width:100%;height:30px;
+  background:#3a3a3a;color:white;border:1px solid #555;margin-top:8px;
 }
 
-/* CONTENT */
+/* content */
 .bottom-tabs{
-  display:flex;
-  border-bottom:1px solid var(--border);
-  background:#2b2b2b;
+  display:flex;border-bottom:1px solid var(--border);background:#2b2b2b;
 }
 .tab{
-  padding:7px 14px;
-  border-right:1px solid var(--border);
-  font-size:12px;
+  padding:7px 14px;border-right:1px solid var(--border);font-size:12px;
 }
-.tab.active{
-  border-top:2px solid var(--accent);
-  background:#353535;
-}
+.tab.active{border-top:2px solid var(--accent);background:#353535}
 .asset-grid{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:16px;
-  padding:16px;
+  display:grid;grid-template-columns:repeat(6,1fr);
+  gap:16px;padding:16px;
 }
 .asset{
-  background:#353535;
-  border:1px solid #4b4b4b;
-  border-radius:4px;
-  padding:8px;
-  text-align:center;
+  background:#353535;border:1px solid #4b4b4b;border-radius:4px;
+  padding:8px;text-align:center;
 }
 .asset-icon{
-  height:70px;
-  display:grid;
-  place-items:center;
-  font-size:30px;
-  border:1px dashed rgba(255,255,255,.15);
-  margin-bottom:8px;
+  height:70px;display:grid;place-items:center;font-size:30px;
+  border:1px dashed rgba(255,255,255,.15);margin-bottom:8px;
 }
 
-/* STATUS */
+/* footer */
 .status{
-  display:flex;
-  align-items:center;
-  padding:0 12px;
-  font-size:12px;
-  color:#8f8f8f;
-  border-top:1px solid var(--border);
-  background:#202020;
+  display:flex;align-items:center;padding:0 12px;
+  font-size:12px;color:#8f8f8f;
+  border-top:1px solid var(--border);background:#202020;
 }
 </style>
 </head>
@@ -279,6 +247,7 @@ input, select, button{
       <div class="dropdown">
         <div>World Outliner</div>
         <div>Details</div>
+        <div>Content Browser</div>
       </div>
     </div>
   </div>
@@ -287,14 +256,17 @@ input, select, button{
     <div class="left-tools">
       <div class="tool-btn">Save</div>
       <div class="tool-btn">Modes</div>
+      <div class="tool-btn" id="rotateTool">Rotate</div>
     </div>
+
     <div class="center-tools">
       <div class="tool-btn">⏮</div>
       <div class="tool-btn play">▶</div>
       <div class="tool-btn">⏹</div>
     </div>
+
     <div class="right-tools">
-      <div>MyProject.uproject</div>
+      <div>MyProject.ruineditor</div>
     </div>
   </div>
 
@@ -302,26 +274,45 @@ input, select, button{
 
     <!-- Hierarchy -->
     <section class="panel">
-      <div class="panel-title">World Outliner</div>
+      <div class="panel-title">
+        <span>World Outliner</span>
+        <button class="tool-btn" id="addActorBtn">+</button>
+      </div>
       <div class="panel-body" id="hierarchy">
-        <div class="outliner-item active" data-name="DirectionalLight" data-x="0" data-y="400" data-z="800">DirectionalLight</div>
+        <div class="outliner-item active" data-name="CubeActor" data-x="0" data-y="0" data-z="0">CubeActor</div>
+        <div class="outliner-item" data-name="DirectionalLight" data-x="0" data-y="400" data-z="800">DirectionalLight</div>
         <div class="outliner-item" data-name="PlayerStart" data-x="120" data-y="0" data-z="32">PlayerStart</div>
-        <div class="outliner-item" data-name="Landscape" data-x="0" data-y="0" data-z="0">Landscape</div>
-        <div class="outliner-item" data-name="StaticMeshActor" data-x="250" data-y="90" data-z="10">StaticMeshActor</div>
       </div>
     </section>
 
     <!-- Viewport -->
     <section class="panel">
       <div class="panel-title">Viewport</div>
-      <div class="panel-body viewport">
+      <div class="panel-body viewport" id="viewport">
         <div class="viewport-label">Perspective</div>
+
+        <div class="viewport-toolbar">
+          <div class="v-btn active">Lit</div>
+          <div class="v-btn">Show</div>
+          <div class="v-btn">Settings</div>
+        </div>
+
+        <div id="cube" class="scene-object selected">
+          <div class="face front"></div>
+          <div class="face back"></div>
+          <div class="face right"></div>
+          <div class="face left"></div>
+          <div class="face top"></div>
+          <div class="face bottom"></div>
+        </div>
+
+        <div id="gizmo" class="gizmo show"></div>
       </div>
     </section>
 
     <!-- Details -->
     <aside class="panel">
-      <div class="panel-title" id="detailsTitle">Details — DirectionalLight</div>
+      <div class="panel-title" id="detailsTitle">Details — CubeActor</div>
       <div class="panel-body">
 
         <div class="group">
@@ -330,22 +321,15 @@ input, select, button{
           <div class="row">
             <div class="axis">L</div>
             <input id="locX" class="field" value="0">
-            <input id="locY" class="field" value="400">
-            <input id="locZ" class="field" value="800">
+            <input id="locY" class="field" value="0">
+            <input id="locZ" class="field" value="0">
           </div>
 
           <div class="row">
             <div class="axis">R</div>
-            <input class="field" value="0">
-            <input class="field" value="0">
-            <input class="field" value="0">
-          </div>
-
-          <div class="row">
-            <div class="axis">S</div>
-            <input class="field" value="1">
-            <input class="field" value="1">
-            <input class="field" value="1">
+            <input id="rotX" class="field" value="-18">
+            <input id="rotY" class="field" value="25">
+            <input id="rotZ" class="field" value="0">
           </div>
         </div>
 
@@ -356,15 +340,14 @@ input, select, button{
             <option>Floating Pawn Movement</option>
             <option>Projectile Movement</option>
             <option>Rotating Movement</option>
-            <option>Nav Movement</option>
           </select>
         </div>
 
         <div class="group">
           <h4>Attached Scripts</h4>
           <div class="script-list" id="scriptList">
-            <div class="script-item">HealthComponent.cs</div>
-            <div class="script-item">PlayerController.cs</div>
+            <div class="script-item">SpinComponent.cs</div>
+            <div class="script-item">SelectableActor.cs</div>
           </div>
           <button class="add-script" onclick="addScript()">+ Add Script</button>
         </div>
@@ -378,7 +361,6 @@ input, select, button{
         <div class="tab active">Content Browser</div>
         <div class="tab">Output Log</div>
       </div>
-
       <div class="asset-grid">
         <div class="asset"><div class="asset-icon">🧊</div>Static Mesh</div>
         <div class="asset"><div class="asset-icon">🎨</div>Material</div>
@@ -391,12 +373,79 @@ input, select, button{
 
   </main>
 
-  <footer class="status">
-    Static UE4.26 Editor Mockup — hierarchy/detail placeholders enabled
+  <footer class="status" id="status">
+    Static UE4.26 Editor Mockup — click cube + drag to rotate
   </footer>
 </div>
 
 <script>
+const cube = document.getElementById("cube");
+const gizmo = document.getElementById("gizmo");
+const viewport = document.getElementById("viewport");
+const statusBar = document.getElementById("status");
+
+const rotX = document.getElementById("rotX");
+const rotY = document.getElementById("rotY");
+const rotZ = document.getElementById("rotZ");
+
+let rx = -18, ry = 25, rz = 0;
+let dragging = false;
+let selected = true;
+
+function updateCube(){
+  cube.style.transform =
+    `translate(-50%,-50%) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`;
+  rotX.value = rx.toFixed(0);
+  rotY.value = ry.toFixed(0);
+  rotZ.value = rz.toFixed(0);
+
+  const rect = cube.getBoundingClientRect();
+  const vp = viewport.getBoundingClientRect();
+  gizmo.style.left = (rect.left - vp.left + rect.width/2) + "px";
+  gizmo.style.top  = (rect.top - vp.top + rect.height/2) + "px";
+}
+updateCube();
+
+cube.addEventListener("click", e=>{
+  e.stopPropagation();
+  selected = true;
+  cube.classList.add("selected");
+  gizmo.classList.add("show");
+  statusBar.textContent = "Cube selected — drag inside viewport to rotate";
+});
+
+viewport.addEventListener("click", e=>{
+  if(e.target === viewport){
+    selected = false;
+    cube.classList.remove("selected");
+    gizmo.classList.remove("show");
+    statusBar.textContent = "Nothing selected";
+  }
+});
+
+viewport.addEventListener("mousedown", e=>{
+  if(!selected) return;
+  dragging = true;
+});
+
+window.addEventListener("mouseup", ()=> dragging=false);
+
+window.addEventListener("mousemove", e=>{
+  if(!dragging || !selected) return;
+  ry += e.movementX * 0.5;
+  rx -= e.movementY * 0.5;
+  updateCube();
+});
+
+[rotX,rotY,rotZ].forEach(input=>{
+  input.addEventListener("input", ()=>{
+    rx = +rotX.value || 0;
+    ry = +rotY.value || 0;
+    rz = +rotZ.value || 0;
+    updateCube();
+  });
+});
+
 const items = document.querySelectorAll(".outliner-item");
 const title = document.getElementById("detailsTitle");
 const locX = document.getElementById("locX");
@@ -407,7 +456,6 @@ items.forEach(item=>{
   item.addEventListener("click", ()=>{
     items.forEach(i=>i.classList.remove("active"));
     item.classList.add("active");
-
     title.textContent = "Details — " + item.dataset.name;
     locX.value = item.dataset.x;
     locY.value = item.dataset.y;
@@ -416,12 +464,20 @@ items.forEach(item=>{
 });
 
 function addScript(){
-  const list = document.getElementById("scriptList");
   const div = document.createElement("div");
   div.className = "script-item";
   div.textContent = "NewScript.cs";
-  list.appendChild(div);
+  document.getElementById("scriptList").appendChild(div);
 }
+
+document.getElementById("addActorBtn").onclick = ()=>{
+  const d = document.createElement("div");
+  d.className = "outliner-item";
+  d.textContent = "NewActor";
+  d.dataset.name = "NewActor";
+  d.dataset.x = 0; d.dataset.y = 0; d.dataset.z = 0;
+  document.getElementById("hierarchy").appendChild(d);
+};
 </script>
 
 </body>
