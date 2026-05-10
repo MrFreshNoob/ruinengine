@@ -219,6 +219,161 @@ button{cursor:pointer}
   font-size:12px;color:#8f8f8f;
   border-top:1px solid var(--border);background:#202020;
 }
+
+/* modal */
+.modal{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);
+  z-index:100;align-items:center;justify-content:center;
+}
+.modal.show{display:flex}
+.modal-content{
+  background:#2c2c2c;border:1px solid var(--border);border-radius:8px;
+  width:600px;max-height:80vh;overflow:auto;box-shadow:0 8px 32px rgba(0,0,0,.5);
+}
+.modal-header{
+  padding:20px;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.modal-header h2{font-size:18px}
+.modal-close{
+  background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;
+}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:20px}
+
+/* project templates */
+.template-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:20px;
+}
+.template-card{
+  background:#353535;border:2px solid var(--border);border-radius:6px;
+  padding:16px;cursor:pointer;transition:all 0.2s;
+}
+.template-card:hover{border-color:var(--accent);background:#3f3f3f}
+.template-card.selected{border-color:var(--accent);background:#4b3a1a;outline:2px solid var(--accent)}
+.template-icon{font-size:32px;margin-bottom:8px}
+.template-name{font-weight:600;margin-bottom:4px;font-size:14px}
+.template-desc{font-size:12px;color:var(--muted)}
+
+/* camera overlay */
+.camera-hud{
+  position:absolute;bottom:12px;right:12px;padding:8px;background:rgba(0,0,0,.5);
+  border:1px solid var(--border);border-radius:4px;font-size:11px;color:var(--muted);
+  pointer-events:none;z-index:5;
+}
+.camera-hud div{margin-bottom:3px}
+.camera-hud div:last-child{margin-bottom:0}
+
+/* scene info overlay */
+.scene-info{
+  position:absolute;top:60px;left:12px;background:rgba(0,0,0,.5);padding:8px 12px;
+  border:1px solid var(--border);border-radius:4px;font-size:11px;color:var(--muted);
+  z-index:5;
+}
+
+/* start screen */
+.start-screen{
+  display:none;position:fixed;inset:0;background:linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  z-index:200;flex-direction:column;align-items:center;justify-content:center;
+  gap:32px;
+}
+.start-screen.show{display:flex !important}
+.start-screen-logo{font-size:80px;text-shadow:0 0 20px rgba(245,166,35,0.5)}
+.start-screen h1{
+  font-size:48px;color:#ffffff;font-weight:700;text-shadow:0 2px 10px rgba(0,0,0,0.8);
+  margin:0;letter-spacing:2px;
+}
+.start-button{
+  padding:14px 40px;background:var(--accent);color:#000;border:none;border-radius:4px;
+  font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 15px rgba(245,166,35,0.3);
+}
+.start-button:hover{
+  background:#ffb84d;transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,166,35,0.5);
+}
+
+/* code editor */
+.code-editor-modal{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);
+  z-index:150;align-items:center;justify-content:center;
+}
+.code-editor-modal.show{display:flex !important}
+.code-editor-container{
+  background:#1e1e1e;border:1px solid var(--border);border-radius:8px;
+  width:90vw;height:90vh;display:flex;flex-direction:column;
+  box-shadow:0 12px 48px rgba(0,0,0,.7);overflow:hidden;
+}
+.code-editor-header{
+  padding:12px 16px;background:linear-gradient(#2a2a2a,#222222);border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.code-editor-header h3{margin:0;font-size:14px;color:var(--text)}
+.editor-tabs{
+  display:flex;gap:2px;background:#252525;border-bottom:1px solid var(--border);padding:8px 8px 0;
+  overflow-x:auto;
+}
+.editor-tab{
+  padding:8px 12px;background:#2a2a2a;border:1px solid var(--border);border-bottom:none;
+  font-size:12px;cursor:pointer;border-radius:4px 4px 0 0;
+}
+.editor-tab.active{background:#1e1e1e;color:var(--accent);border-bottom-color:#1e1e1e}
+.code-editor-content{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.code-editor-textarea{
+  flex:1;background:#1e1e1e;color:#d4d4d4;border:none;padding:16px;font-family:'Consolas','Monaco','Courier New',monospace;
+  font-size:13px;line-height:1.6;resize:none;outline:none;
+}
+.code-editor-textarea::selection{background:rgba(245,166,35,0.3)}
+.code-editor-footer{
+  padding:12px 16px;background:linear-gradient(#222222,#1a1a1a);border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+}
+.code-editor-buttons{display:flex;gap:8px}
+.code-btn{
+  padding:8px 16px;background:#3a3a3a;border:1px solid #555;color:var(--text);
+  border-radius:4px;cursor:pointer;font-size:12px;transition:0.2s;
+}
+.code-btn:hover{background:#4a4a4a;border-color:var(--accent)}
+.code-btn.execute{background:var(--accent);color:#000;font-weight:600}
+.code-btn.execute:hover{background:#ffb84d}
+.code-output{
+  background:#0d0d0d;padding:12px 16px;border-top:1px solid var(--border);
+  max-height:150px;overflow-y:auto;font-size:11px;font-family:monospace;
+  color:#888;
+}
+.code-output.error{color:#ff6b6b}
+.code-output.success{color:#51cf66}
+.code-output div{margin-bottom:4px}
+
+/* script item clickable */
+.script-item{
+  padding:8px;background:#202020;border:1px solid #444;font-size:12px;cursor:pointer;
+  transition:0.2s;border-radius:3px;
+}
+.script-item:hover{border-color:var(--accent);background:#2a2a2a}
+
+/* intellisense autocomplete */
+.intellisense-popup{
+  display:none;position:absolute;background:#252525;border:1px solid var(--border);
+  border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,.8);z-index:1000;
+  max-height:200px;overflow-y:auto;min-width:200px;
+}
+.intellisense-popup.show{display:block}
+.intellisense-item{
+  padding:8px 12px;cursor:pointer;font-size:12px;color:#d4d4d4;
+  display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.05);
+}
+.intellisense-item.selected{background:var(--accent);color:#000}
+.intellisense-item:last-child{border-bottom:none}
+.intellisense-icon{font-size:12px;min-width:16px;text-align:center}
+.intellisense-label{flex:1}
+.intellisense-type{font-size:10px;color:#888;margin-left:auto;opacity:0.7}
+.intellisense-doc{
+  position:absolute;left:100%;top:0;margin-left:8px;background:#1e1e1e;
+  border:1px solid var(--border);border-radius:4px;padding:8px 12px;
+  font-size:11px;color:#888;width:250px;z-index:1001;
+  display:none;max-height:200px;overflow-y:auto;
+}
+.intellisense-doc.show{display:block}
+
 </style>
 </head>
 <body>
@@ -230,9 +385,9 @@ button{cursor:pointer}
 
     <div class="menu-item">File
       <div class="dropdown">
-        <div>New Level</div>
-        <div>Open Project</div>
-        <div>Save All</div>
+        <div onclick="openNewProjectModal()">New Project</div>
+        <div onclick="statusBar.textContent = 'Opening project...'">Open Project</div>
+        <div onclick="statusBar.textContent = 'Project saved!'">Save All</div>
       </div>
     </div>
 
@@ -292,9 +447,9 @@ button{cursor:pointer}
         <div class="viewport-label">Perspective</div>
 
         <div class="viewport-toolbar">
-          <div class="v-btn active">Lit</div>
-          <div class="v-btn">Show</div>
-          <div class="v-btn">Settings</div>
+          <div class="v-btn active" onclick="toggleLighting(this)">Lit</div>
+          <div class="v-btn" onclick="statusBar.textContent='Show/Hide options toggled'">Show</div>
+          <div class="v-btn" onclick="statusBar.textContent='Viewport settings opened'">Settings</div>
         </div>
 
         <div id="cube" class="scene-object selected">
@@ -374,8 +529,174 @@ button{cursor:pointer}
   </main>
 
   <footer class="status" id="status">
-    Static RE Editor Mockup — click cube + drag to rotate
+    Ruin Engine Ready — MMB drag: pan | Scroll: zoom | WASD: move camera
   </footer>
+
+  <!-- New Project Modal -->
+  <div class="modal" id="newProjectModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>New Project</h2>
+        <button class="modal-close" onclick="closeNewProjectModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <label style="display:block;margin-bottom:16px;">
+          <div style="margin-bottom:8px;font-size:13px;">Project Name</div>
+          <input id="projectNameInput" class="field" value="MyProject" style="width:100%">
+        </label>
+
+        <div style="margin-bottom:16px;">
+          <div style="margin-bottom:12px;font-size:13px;font-weight:600;">Select Template</div>
+          <div class="template-grid">
+            <div class="template-card selected" onclick="selectTemplate(this, 'blank')">
+              <div class="template-icon">⬜</div>
+              <div class="template-name">Blank Project</div>
+              <div class="template-desc">Empty scene with default camera</div>
+            </div>
+            <div class="template-card" onclick="selectTemplate(this, 'topdown')">
+              <div class="template-icon">🎮</div>
+              <div class="template-name">Top-Down</div>
+              <div class="template-desc">Pre-configured for top-down games</div>
+            </div>
+            <div class="template-card" onclick="selectTemplate(this, 'firstperson')">
+              <div class="template-icon">🔫</div>
+              <div class="template-name">First Person</div>
+              <div class="template-desc">First-person perspective setup</div>
+            </div>
+            <div class="template-card" onclick="selectTemplate(this, 'platformer')">
+              <div class="template-icon">🪜</div>
+              <div class="template-name">Platformer</div>
+              <div class="template-desc">2D/3D platformer template</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="start-button" onclick="createProject()" style="width:100%;padding:12px">Create Project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Start Screen -->
+  <div class="start-screen" id="startScreen">
+    <div class="start-screen-logo">🎮</div>
+    <h1>Ruin Engine</h1>
+    <button class="start-button" onclick="openNewProjectModal()">New Project</button>
+    <button class="start-button" style="background:#555" onclick="loadDefaultProject()">Load Default</button>
+  </div>
+
+  <!-- Camera HUD -->
+  <div class="camera-hud" id="cameraHUD" style="display:none">
+    <div>X: <span id="camX">0</span></div>
+    <div>Y: <span id="camY">0</span></div>
+    <div>Zoom: <span id="camZoom">100</span>%</div>
+    <div style="margin-top:6px;border-top:1px solid rgba(255,255,255,.1);padding-top:4px;"></div>
+    <div>MMB: Pan | Scroll: Zoom</div>
+  </div>
+
+  <!-- Scene Info -->
+  <div class="scene-info" id="sceneInfo" style="display:none">
+    <div>Actors: <span id="actorCount">0</span></div>
+  </div>
+
+  <!-- Code Editor Modal -->
+  <div class="code-editor-modal" id="codeEditorModal">
+    <div class="code-editor-container">
+      <div class="code-editor-header">
+        <h3>Code Editor — <span id="editorScriptName">NewScript.cs</span></h3>
+        <div style="display:flex;gap:12px;align-items:center">
+          <select id="languageSelector" style="background:#2a2a2a;border:1px solid var(--border);color:var(--text);padding:6px;border-radius:3px;font-size:11px;cursor:pointer">
+            <option value="csharp">C# (Recommended)</option>
+            <option value="javascript">JavaScript</option>
+          </select>
+          <button class="modal-close" onclick="closeCodeEditor()">✕</button>
+        </div>
+      </div>
+      
+      <div class="editor-tabs" id="editorTabs">
+        <div class="editor-tab active" onclick="switchEditorTab(0)">Script Code</div>
+        <div class="editor-tab" onclick="switchEditorTab(1)">API Docs</div>
+      </div>
+
+      <div class="code-editor-content">
+        <div style="position:relative;flex:1;display:flex;flex-direction:column">
+          <textarea id="codeEditorArea" class="code-editor-textarea" placeholder="// Write your script here&#10;// Use cube.rotate(x, y, z) to control objects&#10;// statusBar.textContent = 'message' to update status&#10;// cube.move(x, y, z) to move objects&#10;&#10;function update() {&#10;  // Your code here&#10;}">// Example: Rotate the cube
+function spinCube() {
+  ry += 1;
+  updateCube();
+}</textarea>
+          
+          <!-- Intellisense Autocomplete Popup -->
+          <div class="intellisense-popup" id="intellisensePopup">
+            <div id="intellisenseList"></div>
+            <div class="intellisense-doc" id="intellisenseDoc"></div>
+          </div>
+        </div>
+
+        <div id="apiDocsArea" style="display:none;padding:16px;overflow-y:auto;flex:1;background:#1e1e1e;font-size:12px;line-height:1.6;color:#d4d4d4;font-family:monospace;">
+          <div style="color:var(--accent);font-weight:600;margin-bottom:16px">📖 C# & JavaScript API Reference</div>
+          
+          <div style="margin-bottom:16px">
+            <div style="color:#9be46e">🎮 Rotation Control</div>
+            <div style="margin-left:16px;color:#888">C#: cube.transform.rotation.y += 2;</div>
+            <div style="margin-left:16px;color:#888">JS: ry += 2; updateCube();</div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <div style="color:#9be46e">📍 Position Control</div>
+            <div style="margin-left:16px;color:#888">C#: cube.transform.position.x = 100;</div>
+            <div style="margin-left:16px;color:#888">JS: locOffsetX = 100; updateCube();</div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <div style="color:#9be46e">💬 Logging & Debug</div>
+            <div style="margin-left:16px;color:#888">C#: Debug.Log("message");</div>
+            <div style="margin-left:16px;color:#888">JS: console.log("message");</div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <div style="color:#9be46e">📊 Global Variables</div>
+            <div style="margin-left:16px;color:#888">• rx, ry, rz — Rotation degrees</div>
+            <div style="margin-left:16px;color:#888">• cameraX, cameraY, cameraZoom</div>
+            <div style="margin-left:16px;color:#888">• locOffsetX, locOffsetY, locOffsetZ</div>
+          </div>
+
+          <div style="margin-bottom:16px;border-top:1px solid rgba(255,255,255,.1);padding-top:12px">
+            <div style="color:#51cf66">✓ C# Example</div>
+            <div style="margin-left:16px;color:#888;background:#0d0d0d;padding:8px;border-radius:3px;margin-top:4px">
+              public void RotateCube() {<br>
+              &nbsp;&nbsp;cube.transform.rotation.y += 3;<br>
+              &nbsp;&nbsp;cube.transform.rotation.x -= 1;<br>
+              }<br>
+              RotateCube();
+            </div>
+          </div>
+
+          <div>
+            <div style="color:#51cf66">✓ JavaScript Example</div>
+            <div style="margin-left:16px;color:#888;background:#0d0d0d;padding:8px;border-radius:3px;margin-top:4px">
+              function rotateCube() {<br>
+              &nbsp;&nbsp;ry += 3;<br>
+              &nbsp;&nbsp;rx -= 1;<br>
+              &nbsp;&nbsp;updateCube();<br>
+              }<br>
+              rotateCube();
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-editor-footer">
+        <div class="code-output" id="codeOutput" style="display:none">
+          <div id="outputContent"></div>
+        </div>
+        <div class="code-editor-buttons">
+          <button class="code-btn" onclick="closeCodeEditor()">Close</button>
+          <button class="code-btn" onclick="clearCodeOutput()">Clear Output</button>
+          <button class="code-btn execute" onclick="executeCode()">Execute Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -392,19 +713,7 @@ let rx = -18, ry = 25, rz = 0;
 let dragging = false;
 let selected = true;
 
-function updateCube(){
-  cube.style.transform =
-    `translate(-50%,-50%) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`;
-  rotX.value = rx.toFixed(0);
-  rotY.value = ry.toFixed(0);
-  rotZ.value = rz.toFixed(0);
-
-  const rect = cube.getBoundingClientRect();
-  const vp = viewport.getBoundingClientRect();
-  gizmo.style.left = (rect.left - vp.left + rect.width/2) + "px";
-  gizmo.style.top  = (rect.top - vp.top + rect.height/2) + "px";
-}
-updateCube();
+// updateCube is now defined later in the script after location variables are declared
 
 cube.addEventListener("click", e=>{
   e.stopPropagation();
@@ -434,8 +743,10 @@ window.addEventListener("mousemove", e=>{
   if(!dragging || !selected) return;
   ry += e.movementX * 0.5;
   rx -= e.movementY * 0.5;
-  updateCube();
+  // updateCube() will be called after it's defined
 });
+
+// Keep this marker and add updateCube() after it's defined
 
 [rotX,rotY,rotZ].forEach(input=>{
   input.addEventListener("input", ()=>{
@@ -452,32 +763,761 @@ const locX = document.getElementById("locX");
 const locY = document.getElementById("locY");
 const locZ = document.getElementById("locZ");
 
-items.forEach(item=>{
-  item.addEventListener("click", ()=>{
-    items.forEach(i=>i.classList.remove("active"));
-    item.classList.add("active");
-    title.textContent = "Details — " + item.dataset.name;
-    locX.value = item.dataset.x;
-    locY.value = item.dataset.y;
-    locZ.value = item.dataset.z;
+let locOffsetX = 0, locOffsetY = 0, locOffsetZ = 0;
+let currentSelectedItem = null;
+let isPlayingAnimation = false;
+let rotateToolActive = false;
+
+function updateHierarchyItems(){
+  document.querySelectorAll(".outliner-item").forEach(item=>{
+    item.addEventListener("click", selectItem);
+  });
+}
+
+function selectItem(e){
+  document.querySelectorAll(".outliner-item").forEach(i=>i.classList.remove("active"));
+  e.target.classList.add("active");
+  currentSelectedItem = e.target;
+  
+  const name = e.target.dataset.name;
+  title.textContent = "Details — " + name;
+  locX.value = e.target.dataset.x || 0;
+  locY.value = e.target.dataset.y || 0;
+  locZ.value = e.target.dataset.z || 0;
+  
+  if(name === "CubeActor"){
+    cube.classList.add("selected");
+    gizmo.classList.add("show");
+  } else {
+    cube.classList.remove("selected");
+    gizmo.classList.remove("show");
+  }
+  statusBar.textContent = name + " selected";
+}
+
+updateHierarchyItems();
+
+// Location fields update cube position
+[locX, locY, locZ].forEach(input => {
+  input.addEventListener("input", ()=>{
+    locOffsetX = parseInt(locX.value) || 0;
+    locOffsetY = parseInt(locY.value) || 0;
+    locOffsetZ = parseInt(locZ.value) || 0;
+    updateCube();
   });
 });
+
+function updateCube(){
+  const translateX = locOffsetX * 0.1;
+  const translateY = locOffsetY * 0.1;
+  const translateZ = locOffsetZ * 0.1;
+  
+  cube.style.transform =
+    `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) 
+     translateZ(${translateZ}px)
+     rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`;
+  
+  rotX.value = rx.toFixed(0);
+  rotY.value = ry.toFixed(0);
+  rotZ.value = rz.toFixed(0);
+
+  const rect = cube.getBoundingClientRect();
+  const vp = viewport.getBoundingClientRect();
+  gizmo.style.left = (rect.left - vp.left + rect.width/2) + "px";
+  gizmo.style.top  = (rect.top - vp.top + rect.height/2) + "px";
+}
+
+updateCube();
+
+// Tab switching for Content Browser / Output Log
+document.querySelectorAll(".bottom-tabs .tab").forEach((tab, idx)=>{
+  tab.addEventListener("click", function(){
+    document.querySelectorAll(".bottom-tabs .tab").forEach(t=>t.classList.remove("active"));
+    this.classList.add("active");
+    
+    const grid = document.querySelector(".asset-grid");
+    if(idx === 0){
+      grid.innerHTML = `
+        <div class="asset"><div class="asset-icon">🧊</div>Static Mesh</div>
+        <div class="asset"><div class="asset-icon">🎨</div>Material</div>
+        <div class="asset"><div class="asset-icon">🖼</div>Texture</div>
+        <div class="asset"><div class="asset-icon">📘</div>Blueprint</div>
+        <div class="asset"><div class="asset-icon">🎞</div>Animation</div>
+        <div class="asset"><div class="asset-icon">🔊</div>Sound Cue</div>
+      `;
+    } else {
+      grid.innerHTML = `<div style="padding: 16px; color: #888;">[Output Log]<br>No errors or warnings.</div>`;
+    }
+  });
+});
+
+// Rotate tool toggle
+document.getElementById("rotateTool").addEventListener("click", function(){
+  rotateToolActive = !rotateToolActive;
+  this.classList.toggle("active");
+  if(rotateToolActive){
+    statusBar.textContent = "Rotate tool active — drag to rotate";
+  } else {
+    statusBar.textContent = "Rotate tool disabled";
+  }
+});
+
+// Play button animation
+const playBtn = document.querySelector(".play");
+playBtn.addEventListener("click", ()=>{
+  isPlayingAnimation = !isPlayingAnimation;
+  if(isPlayingAnimation){
+    playBtn.style.color = "#ff6b6b";
+    playBtn.textContent = "⏸";
+    statusBar.textContent = "Playing...";
+    spinCube();
+  } else {
+    playBtn.style.color = "#9be46e";
+    playBtn.textContent = "▶";
+    statusBar.textContent = "Stopped";
+  }
+});
+
+function spinCube(){
+  if(!isPlayingAnimation) return;
+  ry += 2;
+  updateCube();
+  requestAnimationFrame(spinCube);
+}
 
 function addScript(){
   const div = document.createElement("div");
   div.className = "script-item";
-  div.textContent = "NewScript.cs";
+  div.textContent = "NewScript" + Math.floor(Math.random()*1000) + ".cs";
   document.getElementById("scriptList").appendChild(div);
+  statusBar.textContent = "Script added";
 }
 
 document.getElementById("addActorBtn").onclick = ()=>{
+  const counter = document.querySelectorAll(".outliner-item").length + 1;
   const d = document.createElement("div");
   d.className = "outliner-item";
-  d.textContent = "NewActor";
-  d.dataset.name = "NewActor";
-  d.dataset.x = 0; d.dataset.y = 0; d.dataset.z = 0;
+  d.textContent = "NewActor_" + counter;
+  d.dataset.name = "NewActor_" + counter;
+  d.dataset.x = Math.random() * 200 - 100;
+  d.dataset.y = Math.random() * 200 - 100;
+  d.dataset.z = 0;
   document.getElementById("hierarchy").appendChild(d);
+  d.addEventListener("click", selectItem);
+  statusBar.textContent = "Actor created: " + d.dataset.name;
+  updateActorCount();
 };
+
+// ===== CAMERA SYSTEM =====
+let cameraX = 0, cameraY = 0, cameraZoom = 1;
+let isPanning = false;
+let panStartX = 0, panStartY = 0;
+
+// Middle mouse button panning
+viewport.addEventListener("mousedown", e => {
+  if(e.button === 1) { // Middle mouse button
+    e.preventDefault();
+    isPanning = true;
+    panStartX = e.clientX;
+    panStartY = e.clientY;
+    statusBar.textContent = "Panning camera...";
+  }
+});
+
+viewport.addEventListener("mousemove", e => {
+  if(!isPanning) return;
+  const deltaX = (e.clientX - panStartX) / cameraZoom;
+  const deltaY = (e.clientY - panStartY) / cameraZoom;
+  
+  cameraX += deltaX;
+  cameraY += deltaY;
+  
+  viewport.style.backgroundPosition = `${cameraX}px ${cameraY}px`;
+  cube.style.filter = `brightness(${0.8 + cameraZoom * 0.2})`;
+  
+  updateCameraHUD();
+});
+
+window.addEventListener("mouseup", e => {
+  if(isPanning){
+    isPanning = false;
+    panStartX = e.clientX;
+    panStartY = e.clientY;
+    statusBar.textContent = "Camera panned";
+  }
+});
+
+// Mouse wheel zoom
+viewport.addEventListener("wheel", e => {
+  e.preventDefault();
+  const zoomSpeed = 0.1;
+  const oldZoom = cameraZoom;
+  
+  if(e.deltaY < 0) cameraZoom = Math.min(cameraZoom + zoomSpeed, 3);
+  else cameraZoom = Math.max(cameraZoom - zoomSpeed, 0.3);
+  
+  statusBar.textContent = `Zoom: ${(cameraZoom * 100).toFixed(0)}%`;
+  updateCameraHUD();
+});
+
+// Keyboard camera controls (WASD)
+const keysPressed = {};
+window.addEventListener("keydown", e => {
+  keysPressed[e.key.toLowerCase()] = true;
+  
+  const speed = 15 / cameraZoom;
+  if(keysPressed['w']) cameraY -= speed;
+  if(keysPressed['s']) cameraY += speed;
+  if(keysPressed['a']) cameraX -= speed;
+  if(keysPressed['d']) cameraX += speed;
+  
+  if(['w','s','a','d'].includes(e.key.toLowerCase())){
+    viewport.style.backgroundPosition = `${cameraX}px ${cameraY}px`;
+    updateCameraHUD();
+  }
+});
+
+window.addEventListener("keyup", e => {
+  keysPressed[e.key.toLowerCase()] = false;
+});
+
+function updateCameraHUD(){
+  document.getElementById("camX").textContent = cameraX.toFixed(0);
+  document.getElementById("camY").textContent = cameraY.toFixed(0);
+  document.getElementById("camZoom").textContent = (cameraZoom * 100).toFixed(0);
+}
+
+function updateActorCount(){
+  const count = document.querySelectorAll(".outliner-item").length;
+  document.getElementById("actorCount").textContent = count;
+}
+
+// ===== PROJECT SYSTEM =====
+let currentTemplate = "blank";
+let currentProject = null;
+
+function loadDefaultProject(){
+  const startScreen = document.getElementById("startScreen");
+  startScreen.classList.remove("show");
+  document.querySelector(".editor").style.display = "grid";
+  document.getElementById("cameraHUD").style.display = "block";
+  document.getElementById("sceneInfo").style.display = "block";
+  currentProject = { name: "DefaultProject", template: "blank" };
+  updateActorCount();
+  statusBar.textContent = "Welcome to Ruin Engine!";
+}
+
+function openNewProjectModal(){
+  document.getElementById("newProjectModal").classList.add("show");
+}
+
+function closeNewProjectModal(){
+  document.getElementById("newProjectModal").classList.remove("show");
+}
+
+function selectTemplate(element, template){
+  document.querySelectorAll(".template-card").forEach(e => e.classList.remove("selected"));
+  element.classList.add("selected");
+  currentTemplate = template;
+}
+
+function createProject(){
+  const projectName = document.getElementById("projectNameInput").value || "MyProject";
+  currentProject = { name: projectName, template: currentTemplate };
+  
+  // Clear scene
+  const hierarchy = document.getElementById("hierarchy");
+  hierarchy.innerHTML = "";
+  
+  // Load template
+  if(currentTemplate === "blank"){
+    loadBlankTemplate(projectName);
+  } else if(currentTemplate === "topdown"){
+    loadTopDownTemplate(projectName);
+  } else if(currentTemplate === "firstperson"){
+    loadFirstPersonTemplate(projectName);
+  } else if(currentTemplate === "platformer"){
+    loadPlatformerTemplate(projectName);
+  }
+  
+  // Update UI
+  document.querySelector(".right-tools div:last-child").textContent = projectName + ".ruineditor";
+  document.getElementById("newProjectModal").classList.remove("show");
+  document.querySelector(".editor").style.display = "grid";
+  document.getElementById("startScreen").classList.remove("show");
+  document.getElementById("cameraHUD").style.display = "block";
+  document.getElementById("sceneInfo").style.display = "block";
+  updateActorCount();
+  statusBar.textContent = `Project "${projectName}" created with ${currentTemplate} template`;
+}
+
+function loadBlankTemplate(projectName){
+  const hierarchy = document.getElementById("hierarchy");
+  
+  // Add default actors
+  const actors = [
+    { name: "Camera", x: "0", y: "0", z: "100" },
+    { name: "DirectionalLight", x: "300", y: "400", z: "800" },
+    { name: "Ground", x: "0", y: "0", z: "-50" }
+  ];
+  
+  actors.forEach((actor, i) => {
+    const div = document.createElement("div");
+    div.className = "outliner-item" + (i === 0 ? " active" : "");
+    div.dataset.name = actor.name;
+    div.dataset.x = actor.x;
+    div.dataset.y = actor.y;
+    div.dataset.z = actor.z;
+    div.textContent = actor.name;
+    div.addEventListener("click", selectItem);
+    hierarchy.appendChild(div);
+  });
+}
+
+function loadTopDownTemplate(projectName){
+  const hierarchy = document.getElementById("hierarchy");
+  
+  const actors = [
+    { name: "TopDownCamera", x: "0", y: "-500", z: "400" },
+    { name: "Player", x: "0", y: "0", z: "0" },
+    { name: "Ground", x: "0", y: "0", z: "-100" },
+    { name: "Enemy_1", x: "200", y: "200", z: "0" },
+    { name: "Enemy_2", x: "-200", y: "-200", z: "0" }
+  ];
+  
+  actors.forEach((actor, i) => {
+    const div = document.createElement("div");
+    div.className = "outliner-item" + (i === 0 ? " active" : "");
+    div.dataset.name = actor.name;
+    div.dataset.x = actor.x;
+    div.dataset.y = actor.y;
+    div.dataset.z = actor.z;
+    div.textContent = actor.name;
+    div.addEventListener("click", selectItem);
+    hierarchy.appendChild(div);
+  });
+}
+
+function loadFirstPersonTemplate(projectName){
+  const hierarchy = document.getElementById("hierarchy");
+  
+  const actors = [
+    { name: "FirstPersonPlayer", x: "0", y: "0", z: "80" },
+    { name: "PlayerCamera", x: "0", y: "0", z: "160" },
+    { name: "Weapon", x: "20", y: "-20", z: "150" },
+    { name: "Floor", x: "0", y: "0", z: "-50" }
+  ];
+  
+  actors.forEach((actor, i) => {
+    const div = document.createElement("div");
+    div.className = "outliner-item" + (i === 0 ? " active" : "");
+    div.dataset.name = actor.name;
+    div.dataset.x = actor.x;
+    div.dataset.y = actor.y;
+    div.dataset.z = actor.z;
+    div.textContent = actor.name;
+    div.addEventListener("click", selectItem);
+    hierarchy.appendChild(div);
+  });
+}
+
+function loadPlatformerTemplate(projectName){
+  const hierarchy = document.getElementById("hierarchy");
+  
+  const actors = [
+    { name: "Player", x: "0", y: "0", z: "0" },
+    { name: "Camera", x: "0", y: "-200", z: "200" },
+    { name: "Platform_1", x: "0", y: "0", z: "-100" },
+    { name: "Platform_2", x: "400", y: "0", z: "-50" },
+    { name: "Spike_Trap", x: "0", y: "500", z: "-80" }
+  ];
+  
+  actors.forEach((actor, i) => {
+    const div = document.createElement("div");
+    div.className = "outliner-item" + (i === 0 ? " active" : "");
+    div.dataset.name = actor.name;
+    div.dataset.x = actor.x;
+    div.dataset.y = actor.y;
+    div.dataset.z = actor.z;
+    div.textContent = actor.name;
+    div.addEventListener("click", selectItem);
+    hierarchy.appendChild(div);
+  });
+}
+
+// Show start screen on load
+window.addEventListener("load", () => {
+  document.getElementById("startScreen").classList.add("show");
+});
+
+function toggleLighting(btn){
+  const isActive = btn.classList.toggle("active");
+  if(isActive){
+    cube.style.opacity = "1";
+    statusBar.textContent = "Lighting: Enabled";
+  } else {
+    cube.style.opacity = "0.5";
+    statusBar.textContent = "Lighting: Disabled (unlit mode)";
+  }
+}
+
+// ===== CODE EDITOR SYSTEM =====
+let scriptStorage = {};
+let currentEditingScript = null;
+
+function openCodeEditor(scriptName){
+  currentEditingScript = scriptName || "NewScript.cs";
+  
+  // Load script if exists, otherwise create empty
+  if(!scriptStorage[currentEditingScript]){
+    scriptStorage[currentEditingScript] = "// " + currentEditingScript + "\n\n";
+  }
+  
+  document.getElementById("editorScriptName").textContent = currentEditingScript;
+  document.getElementById("codeEditorArea").value = scriptStorage[currentEditingScript];
+  document.getElementById("codeEditorModal").classList.add("show");
+  statusBar.textContent = `Editing script: ${currentEditingScript}`;
+}
+
+function closeCodeEditor(){
+  // Auto-save
+  if(currentEditingScript){
+    scriptStorage[currentEditingScript] = document.getElementById("codeEditorArea").value;
+  }
+  document.getElementById("codeEditorModal").classList.remove("show");
+  currentEditingScript = null;
+  statusBar.textContent = "Code editor closed";
+}
+
+function switchEditorTab(tabIndex){
+  const tabs = document.querySelectorAll(".editor-tab");
+  const codeArea = document.getElementById("codeEditorArea");
+  const apiDocs = document.getElementById("apiDocsArea");
+  
+  tabs.forEach(t => t.classList.remove("active"));
+  tabs[tabIndex].classList.add("active");
+  
+  if(tabIndex === 0){
+    codeArea.style.display = "block";
+    apiDocs.style.display = "none";
+  } else {
+    codeArea.style.display = "none";
+    apiDocs.style.display = "block";
+  }
+}
+
+// ===== C# TO JAVASCRIPT TRANSPILER =====
+function transpileCSharp(csharpCode) {
+  let jsCode = csharpCode;
+  
+  // Remove using statements and namespaces
+  jsCode = jsCode.replace(/using\s+[^;]+;/g, "");
+  jsCode = jsCode.replace(/namespace\s+[^{]+\{/g, "");
+  jsCode = jsCode.replace(/^\s*\}/gm, "");
+  
+  // Convert class definitions to object literals (simplified)
+  jsCode = jsCode.replace(/public\s+class\s+(\w+)\s*\{/g, "class $1 {");
+  
+  // Convert method definitions
+  jsCode = jsCode.replace(/public\s+void\s+(\w+)\s*\(/g, "function $1(");
+  jsCode = jsCode.replace(/private\s+void\s+(\w+)\s*\(/g, "function $1(");
+  jsCode = jsCode.replace(/public\s+(\w+)\s+(\w+)\s*\(/g, "function $2(");
+  jsCode = jsCode.replace(/private\s+(\w+)\s+(\w+)\s*\(/g, "function $2(");
+  
+  // Convert properties/fields
+  jsCode = jsCode.replace(/public\s+(\w+)\s+(\w+)\s*;/g, "this.$2 = null;");
+  jsCode = jsCode.replace(/private\s+(\w+)\s+(\w+)\s*;/g, "this.$2 = null;");
+  
+  // Convert Debug.Log to console.log
+  jsCode = jsCode.replace(/Debug\.Log\s*\(/g, "console.log(");
+  
+  // Convert Vector3 to object
+  jsCode = jsCode.replace(/new\s+Vector3\s*\(\s*([^,]+)\s*,\s*([^,]+)\s*,\s*([^)]+)\s*\)/g, "{x: $1, y: $2, z: $3}");
+  jsCode = jsCode.replace(/Vector3\s*\(\s*([^,]+)\s*,\s*([^,]+)\s*,\s*([^)]+)\s*\)/g, "{x: $1, y: $2, z: $3}");
+  
+  // Convert transform.rotation assignments
+  jsCode = jsCode.replace(/cube\.transform\.rotation\.x\s*=\s*/g, "rx = ");
+  jsCode = jsCode.replace(/cube\.transform\.rotation\.y\s*=\s*/g, "ry = ");
+  jsCode = jsCode.replace(/cube\.transform\.rotation\.z\s*=\s*/g, "rz = ");
+  
+  // Convert transform.position assignments
+  jsCode = jsCode.replace(/cube\.transform\.position\.x\s*=\s*/g, "locOffsetX = ");
+  jsCode = jsCode.replace(/cube\.transform\.position\.y\s*=\s*/g, "locOffsetY = ");
+  jsCode = jsCode.replace(/cube\.transform\.position\.z\s*=\s*/g, "locOffsetZ = ");
+  
+  // Remove access modifiers
+  jsCode = jsCode.replace(/\b(public|private|protected|internal|static|readonly)\s+/g, "");
+  
+  // Convert property accessors { get; set; } to nothing
+  jsCode = jsCode.replace(/\{\s*get\s*;\s*set\s*;\s*\}/g, "");
+  jsCode = jsCode.replace(/\{\s*get\s*;\s*\}/g, "");
+  
+  // Convert StartCoroutine (simplified - just call the function)
+  jsCode = jsCode.replace(/StartCoroutine\s*\(\s*(\w+)\s*\(\s*\)\s*\);/g, "$1();");
+  
+  // Convert foreach to for
+  jsCode = jsCode.replace(/foreach\s*\(\s*(\w+)\s+(\w+)\s+in\s+(\w+)\s*\)/g, "for(let $2 of $3)");
+  
+  // Remove trailing semicolons before closing braces
+  jsCode = jsCode.replace(/;\s*\}/g, "\n}");
+  
+  // Clean up excess whitespace
+  jsCode = jsCode.replace(/\n\n\n+/g, "\n\n");
+  
+  return jsCode;
+}
+
+function executeCode(){
+  const code = document.getElementById("codeEditorArea").value;
+  const language = document.getElementById("languageSelector").value;
+  const output = document.getElementById("outputContent");
+  const outputContainer = document.getElementById("codeOutput");
+  
+  // Clear previous output
+  output.innerHTML = "";
+  outputContainer.style.display = "block";
+  outputContainer.classList.remove("error", "success");
+  
+  try {
+    // Transpile if C#
+    let executableCode = code;
+    if(language === "csharp") {
+      executableCode = transpileCSharp(code);
+    }
+    
+    // Create a safe execution context with available objects
+    const executeContext = {
+      cube,
+      statusBar,
+      updateCube,
+      rx,
+      ry, 
+      rz,
+      cameraX,
+      cameraY,
+      cameraZoom,
+      isPlayingAnimation,
+      ry: ry,
+      rx: rx,
+      rz: rz,
+      console: {
+        log: function(...args) {
+          const msg = args.join(" ");
+          const div = document.createElement("div");
+          div.textContent = "> " + msg;
+          output.appendChild(div);
+        }
+      }
+    };
+    
+    // Execute the user code
+    const func = new Function(...Object.keys(executeContext), executableCode);
+    func(...Object.values(executeContext));
+    
+    // Show success
+    const div = document.createElement("div");
+    div.textContent = "✓ Code executed successfully";
+    div.style.color = "#51cf66";
+    output.appendChild(div);
+    outputContainer.classList.add("success");
+    statusBar.textContent = "Script executed successfully!";
+  } catch(error) {
+    // Show error
+    const div = document.createElement("div");
+    div.textContent = "✗ Error: " + error.message;
+    output.appendChild(div);
+    outputContainer.classList.add("error");
+    statusBar.textContent = "Script error: " + error.message;
+  }
+}
+
+function clearCodeOutput(){
+  document.getElementById("outputContent").innerHTML = "";
+  document.getElementById("codeOutput").style.display = "none";
+}
+
+// Make scripts editable
+function makeScriptsEditable(){
+  document.querySelectorAll(".script-item").forEach(item => {
+    item.style.cursor = "pointer";
+    item.addEventListener("click", function(e){
+      e.stopPropagation();
+      const scriptName = this.textContent.trim();
+      openCodeEditor(scriptName);
+    });
+  });
+}
+
+// Override addScript to make it editable
+const originalAddScript = window.addScript;
+window.addScript = function(){
+  const div = document.createElement("div");
+  div.className = "script-item";
+  const scriptName = "NewScript" + Math.floor(Math.random()*1000) + ".cs";
+  div.textContent = scriptName;
+  document.getElementById("scriptList").appendChild(div);
+  makeScriptsEditable();
+  statusBar.textContent = "Script added: " + scriptName + " (double-click to edit)";
+};
+
+// Initialize script editing on first hierarchy update
+makeScriptsEditable();
+
+// ===== INTELLISENSE SYSTEM =====
+const INTELLISENSE_ITEMS = [
+  // Variables
+  { name: "rx", type: "var", icon: "📊", docs: "Current X rotation in degrees" },
+  { name: "ry", type: "var", icon: "📊", docs: "Current Y rotation in degrees" },
+  { name: "rz", type: "var", icon: "📊", docs: "Current Z rotation in degrees" },
+  { name: "cameraX", type: "var", icon: "📊", docs: "Camera X position" },
+  { name: "cameraY", type: "var", icon: "📊", docs: "Camera Y position" },
+  { name: "cameraZoom", type: "var", icon: "📊", docs: "Camera zoom level (0.3 to 3)" },
+  { name: "isPlayingAnimation", type: "var", icon: "📊", docs: "Boolean - is animation playing" },
+  { name: "locOffsetX", type: "var", icon: "📊", docs: "Cube X location offset" },
+  { name: "locOffsetY", type: "var", icon: "📊", docs: "Cube Y location offset" },
+  { name: "locOffsetZ", type: "var", icon: "📊", docs: "Cube Z location offset" },
+  
+  // Objects
+  { name: "cube", type: "obj", icon: "🎮", docs: "The 3D cube object - access with cube.style, cube.classList" },
+  { name: "statusBar", type: "obj", icon: "🎮", docs: "Status bar element - set statusBar.textContent = 'msg'" },
+  { name: "gizmo", type: "obj", icon: "🎮", docs: "The gizmo circle element around selected objects" },
+  { name: "viewport", type: "obj", icon: "🎮", docs: "The 3D viewport container" },
+  
+  // Methods
+  { name: "updateCube()", type: "func", icon: "⚙️", docs: "Apply all transform changes to the cube" },
+  { name: "updateCameraHUD()", type: "func", icon: "⚙️", docs: "Update camera display values" },
+  { name: "openCodeEditor()", type: "func", icon: "⚙️", docs: "Open code editor for a script" },
+  { name: "executeCode()", type: "func", icon: "⚙️", docs: "Execute the code in the editor" },
+  { name: "spinCube()", type: "func", icon: "⚙️", docs: "Spin animation function (custom)" },
+  { name: "console.log()", type: "func", icon: "⚙️", docs: "Print to output console" },
+  
+  // Common patterns
+  { name: "for(let i=0; i<10; i++)", type: "snippet", icon: "💡", docs: "For loop - iterate n times" },
+  { name: "while(true)", type: "snippet", icon: "💡", docs: "While loop - repeat until condition false" },
+  { name: "if(condition)", type: "snippet", icon: "💡", docs: "If statement - conditional execution" },
+  { name: "function myFunc()", type: "snippet", icon: "💡", docs: "Define a new function" },
+];
+
+let intellisenseSelectedIndex = -1;
+const codeArea = document.getElementById("codeEditorArea");
+const intellisensePopup = document.getElementById("intellisensePopup");
+const intellisenseList = document.getElementById("intellisenseList");
+
+function getWordAtCursor(text, cursorPos) {
+  let start = cursorPos - 1;
+  while(start >= 0 && /[\w$.]/.test(text[start])) start--;
+  return text.substring(start + 1, cursorPos);
+}
+
+function filterIntellisense(prefix) {
+  if(!prefix || prefix.length < 1) return [];
+  const lowerPrefix = prefix.toLowerCase();
+  return INTELLISENSE_ITEMS.filter(item => 
+    item.name.toLowerCase().startsWith(lowerPrefix)
+  ).slice(0, 8);
+}
+
+function showIntellisense(matches, prefix) {
+  if(matches.length === 0) {
+    intellisensePopup.classList.remove("show");
+    return;
+  }
+  
+  intellisenseList.innerHTML = matches.map((item, idx) => `
+    <div class="intellisense-item ${idx === 0 ? 'selected' : ''}" data-index="${idx}" onclick="selectIntellisenseItem(${idx})">
+      <div class="intellisense-icon">${item.icon}</div>
+      <div class="intellisense-label">${item.name}</div>
+      <div class="intellisense-type">${item.type}</div>
+    </div>
+  `).join("");
+  
+  intellisensePopup.classList.add("show");
+  intellisenseSelectedIndex = 0;
+  updateIntellisenseDoc(matches[0]);
+}
+
+function updateIntellisenseDoc(item) {
+  const doc = document.getElementById("intellisenseDoc");
+  if(item) {
+    doc.innerHTML = `<strong>${item.name}</strong><br><span style="color:#d4d4d4">${item.docs}</span>`;
+    doc.classList.add("show");
+  } else {
+    doc.classList.remove("show");
+  }
+}
+
+function selectIntellisenseItem(index) {
+  const filtered = filterIntellisense(getCurrentPrefix());
+  if(filtered[index]) {
+    insertIntellisenseItem(filtered[index].name);
+  }
+}
+
+function getCurrentPrefix() {
+  const text = codeArea.value;
+  const cursorPos = codeArea.selectionStart;
+  return getWordAtCursor(text, cursorPos);
+}
+
+function insertIntellisenseItem(itemName) {
+  const text = codeArea.value;
+  const cursorPos = codeArea.selectionStart;
+  const prefix = getWordAtCursor(text, cursorPos);
+  
+  const start = cursorPos - prefix.length;
+  const newText = text.substring(0, start) + itemName + text.substring(cursorPos);
+  
+  codeArea.value = newText;
+  const newCursorPos = start + itemName.length;
+  codeArea.selectionStart = codeArea.selectionEnd = newCursorPos;
+  
+  intellisensePopup.classList.remove("show");
+  codeArea.focus();
+}
+
+codeArea.addEventListener("input", () => {
+  const prefix = getCurrentPrefix();
+  const matches = filterIntellisense(prefix);
+  showIntellisense(matches, prefix);
+});
+
+codeArea.addEventListener("keydown", (e) => {
+  if(!intellisensePopup.classList.contains("show")) return;
+  
+  const filtered = filterIntellisense(getCurrentPrefix());
+  
+  if(e.key === "ArrowDown") {
+    e.preventDefault();
+    intellisenseSelectedIndex = (intellisenseSelectedIndex + 1) % filtered.length;
+    updateIntellisenseSelection(filtered);
+  } else if(e.key === "ArrowUp") {
+    e.preventDefault();
+    intellisenseSelectedIndex = (intellisenseSelectedIndex - 1 + filtered.length) % filtered.length;
+    updateIntellisenseSelection(filtered);
+  } else if(e.key === "Enter" || e.key === "Tab") {
+    e.preventDefault();
+    if(intellisenseSelectedIndex >= 0 && filtered[intellisenseSelectedIndex]) {
+      insertIntellisenseItem(filtered[intellisenseSelectedIndex].name);
+    }
+  } else if(e.key === "Escape") {
+    intellisensePopup.classList.remove("show");
+  }
+});
+
+function updateIntellisenseSelection(filtered) {
+  document.querySelectorAll(".intellisense-item").forEach((item, idx) => {
+    item.classList.toggle("selected", idx === intellisenseSelectedIndex);
+  });
+  
+  if(filtered[intellisenseSelectedIndex]) {
+    updateIntellisenseDoc(filtered[intellisenseSelectedIndex]);
+  }
+}
+
+codeArea.addEventListener("blur", () => {
+  intellisensePopup.classList.remove("show");
+});
+
 </script>
 
 </body>
